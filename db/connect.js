@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-const connectionString = "mongodb://localhost:27017/tasks"; // ✅ Removed extra space
+const connectionString = process.env.MongoDB_URL;
 
 mongoose
   .connect(connectionString)
@@ -8,5 +9,5 @@ mongoose
     console.log("Connected to MongoDB");
   })
   .catch((err) => {
-    console.error("MongoDB connection error:", err); // ✅ Better error handling
+    console.error("MongoDB connection error:", err);
   });
