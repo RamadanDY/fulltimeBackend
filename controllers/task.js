@@ -1,13 +1,12 @@
-// this is where we write our logic and the send it inside our routes file
+const Task = require("../models/Task");
 
-// this is a controller that is used get all the tasks
-
-const getAllTask = (req, res) => {
+const getAllTask = async (req, res) => {
   res.json({ id: req.params.id });
 };
 
-const createTask = (req, res) => {
-  res.json(req.body);
+const createTask = async (req, res) => {
+  const task = await Task.create({ name: "first task" });
+  res.status(201).json({ task });
 };
 const updateTask = (req, res) => {
   res.send("update task");
