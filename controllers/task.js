@@ -5,7 +5,7 @@ const getAllTask = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
-  const task = await Task.create({ name: "first task" });
+  const task = await Task.create(req.body);
   res.status(201).json({ task });
 };
 const updateTask = (req, res) => {
