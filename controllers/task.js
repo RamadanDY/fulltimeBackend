@@ -5,8 +5,21 @@ const getAllTask = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
-  const task = await Task.create(req.body);
-  res.status(201).json({ task });
+  const createTask = async (req, res) => {
+    try {
+      // Extract the name from the request body
+      const { name } = req.body;
+
+      // Create a new task with the extracted name
+      const task = await Task.create({ name });
+
+      // Send a success response with the created task
+      res.status(201).json({ task });
+    } catch (error) {
+      // Handle errors and send an appropriate response
+      res.status(500).json({ error: error.message });
+    }
+  };
 };
 const updateTask = (req, res) => {
   res.send("update task");
