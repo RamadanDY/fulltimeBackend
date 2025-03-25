@@ -1,28 +1,45 @@
 const Task = require("../models/Task");
 
 const getAllTask = async (req, res) => {
-  res.json({ id: req.params.id });
+  // res.json({ id: req.params.id });
+  try {
+    // lets get all the tasks from the db
+    const tasks = await Task.find({});
+    // we send the json data that we get from the db to the client
+    res.status(201).json({ tasks });
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
 };
 
 const createTask = async (req, res) => {
-  const createTask = async (req, res) => {
-    try {
-      // Extract the name from the request body
-      const { name } = req.body;
+  try {
+    // Extract the name from the request body
+    const { name } = req.body;
 
-      // Create a new task with the extracted name
-      const task = await Task.create({ name });
+    // Create a new task with the extracted name
+    const task = await Task.create({ name });
+    if (!task) console.log("not saved ");
 
-      // Send a success response with the created task
-      res.status(201).json({ task });
-    } catch (error) {
-      // Handle errors and send an appropriate response
-      res.status(500).json({ error: error.message });
-    }
-  };
+    // Send a success response with the created task
+    //the res is used to send data to the client back
+    res.status(201).json({ task });
+  } catch (error) {
+    // Handle errors and send an appropriate response
+    res.status(500).json({ error: error.message });
+  }
 };
+
+const getTask = (req, res) => {
+  // to get specific tasks
+  res.status(500).json({ id: req.params.id });
+};
+
 const updateTask = (req, res) => {
-  res.send("update task");
+  try {
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
 };
 const deleteTask = (req, res) => {
   res.send("delete Task");

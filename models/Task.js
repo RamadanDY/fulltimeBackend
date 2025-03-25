@@ -15,5 +15,10 @@ const TaskSchema = new mongoose.Schema({
     default: false,
   },
 });
+// this is the name for this particular model
+// if we check the db we can see that the collections name is not Task but in this case
+// it has been plularised by mongoDB ie Task will be changed tasks
 
+// we do this if we want to use our own model name
+// module.exports = mongoose.model("Task", TaskSchema,"my_customized_db_name");
 module.exports = mongoose.model("Task", TaskSchema);
